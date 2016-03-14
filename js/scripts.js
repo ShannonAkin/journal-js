@@ -1,25 +1,19 @@
-// back end
-var Journal = function(title, entry) {
+// // back end
+// var moment = require('moment');
+//
+
+function Journal(title, entry, date) {
   this.title = title;
   this.entry = entry;
+  // get date
+  this.date = function(){
+    return moment().format("MMM Do YYYY");
+  };
 };
 
-
+// retuen word count
 Journal.prototype.wordCount = function() {
   return this.entry.split(" ").length;
 };
 
-
-// front end
-$(document).ready(function(){
-  $("form.journalEntry").submit(function(event) {
-    event.preventDefault();
-    var title = $("input#title").val();
-    var entry = $("textarea#entry").val();
-
-    var myJournal = new Journal(title, entry);
-    debugger;
-    $(".entries").append("<p>" + "<b>" + myJournal.title + "</b>"+ "<br>" + myJournal.entry + "</p>");
-    $(".entries").append("word count" + myJournal.wordCount());
-  });
-});
+module.exports.Journal = Journal;
